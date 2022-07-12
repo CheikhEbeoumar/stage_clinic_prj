@@ -8,22 +8,15 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 
 def ajouter_patient(request):
-    form_p = PatientForm()
-    form_r = RDV_form()
-
     if request.method =='POST':
-       form_p= PatientForm(request.POST)
-       form_r= RDV_form(request.POST)
-       if form_r.is_valid():
-          form_p.save()
-          form_r.save()
-          redirect('patient')
-       else:
-          form_p =PatientForm()
-          form_r =RDV_form()
-          
-    context = {'patient':form_p, 'rdv':form_r}
-    return render(request, 'cliniq/ajouter_patient.html', context)
+       form= PatientForm(request.POST)
+       if form.is_valid():
+        form.save()
+        return  redirect('/patients')
+        
+    else:
+        form=PatientForm()
+    return render(request, 'cliniq/ajouter_patient.html',{'form':form})
 
 
 def login(request):
@@ -32,8 +25,12 @@ def login(request):
 
 
 def patients(request):
-    patient = Patient.objects.all()
-    rdv = RDV.objects.all()
-    patients = zip(patient,rdv)
+    patients = Patient.objects.all()
     context = {'patients':patients}
     return render(request, 'cliniq/patient.html', context)
+
+def rdv(request,pk):
+    rdv = RDV.objects.filter(id = pk)
+    patient = rdv.patient_set.all()
+    context = {'patient':patient,'rdv':rdv}
+    return render(request,'cliniq/RDV.html',context)

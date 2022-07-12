@@ -45,7 +45,7 @@ class RDV (models.Model):
     spécialiste =models.ForeignKey(Spécialiste, on_delete=models.CASCADE) 
     date = models.DateField()
     temp = models.TimeField()
-    patient = models.ForeignKey( Patient ,null=True, on_delete=models.CASCADE)
+    patient = models.ForeignKey( Patient, on_delete=models.CASCADE)
      
 
 

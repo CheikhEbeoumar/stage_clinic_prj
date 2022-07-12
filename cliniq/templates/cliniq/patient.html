@@ -25,22 +25,28 @@
                         <th scope="col">N°</th>
                         <th scope="col">PATIENT</th>
                         <th scope="col">AGE</th>
-                        <th scope="col">SPECIALIST</th>
                         <th scope="col">TELEPHONE</th>
                         <th scope="col">RENDEVOU</th>
                         <th scope="col"></th>
                       </tr>
                     </thead>
                     <tbody>
-                      {% for p , r  in patients %}
+                      {% for p in patients %}
                       
                       <tr>
-                        <th scope="row">{{p.id}}</th>
-                        <td>{{p.nom}}</td>
+                      
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{p.nom}} {{p.prénom}}</td>
                         <td>{{p.age}} ans</td>
-                        <td>{{r.spécialiste.nom}} {{r.spécialiste.prénom}} ({{r.spécialiste.spécialité}})</td>
                         <td>{{p.Tél}}</td>
-                        <td>{{r.date}} a({{r.temp}})</td>
+                        <td>
+                          <button
+                            type="button"
+                            class="btn btn-secondary btn-sm px-3"
+                          >
+                          <a class ="nav-link" href="{% url "RDV" p.id %}" ><i>voir le rdv de {{p.nom}}</i></a>
+                        </button>
+                        </td>
                         <td>
                           <button
                             type="button"
