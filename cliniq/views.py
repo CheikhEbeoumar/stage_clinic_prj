@@ -30,7 +30,8 @@ def patients(request):
     return render(request, 'cliniq/patient.html', context)
 
 def rdv(request,pk):
-    rdv = RDV.objects.filter(id = pk)
-    patient = rdv.patient_set.all()
-    context = {'patient':patient,'rdv':rdv}
+    patient = Patient.objects.get(id=pk)
+    rdv = patient.rdv_set.all()
+    
+    context = {'rdv':rdv,'patient':patient}
     return render(request,'cliniq/RDV.html',context)

@@ -2,9 +2,9 @@
 
 {% block content %}
 {% include 'cliniq/navbar.html' %}
-{% for r in rdv.patient %}
-<h1> {{r.patient.nom}} {{r.patient.prénom}} RDV</h1>
-{% endfor %}
+
+
+<h1> {{patient.nom}} {{patient.prénom}} RDV</h1>
 
 <section class="intro">
     <div class="bg-image h-100">
@@ -32,13 +32,12 @@
                         </tr>
                       </thead>
                       <tbody>
-                        
                         {% for r in rdv %}
-                        <tr>
+                        <tr> 
                           <th scope="row">{{forloop.counter}}</th>
                           <td>{{r.date}}</td>
                           <td>{{r.temp}} ans</td>
-                          <td>{{r.spécialiste}} ({{r.spécialiste.spécialité}}) </td>
+                          <td>{{r.spécialiste}} {{r.spécialiste.prénom}} ({{r.spécialiste.spécialité}}) </td>
                           <td>
                             <button
                               type="button"
@@ -66,7 +65,4 @@
       </div>
     </div>
   </section>
-
-
-
 {% endblock %}
