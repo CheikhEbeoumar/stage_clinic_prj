@@ -9,9 +9,9 @@
     <div class="mask d-flex align-items-center h-100">
       <div class="container">
         <div  style=" margin-top : 50px;">
-          <button type="button" class="btn btn-secondary">
+          <button type="button" class="btn btn-secondary btn-lg">
             
-            <a class ="nav-link" href="{% url "ajouter_patient" %}" ><i class="fas fa-times">+ Ajouter</i></a>
+            <a class ="nav-link" href="{% url "ajouter_patient" %}" ><i class="fas fa-times" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Ajouter</i></a>
           </button>
         </div>
         <div class="row justify-content-center" style=" margin-top : 20px;">
@@ -31,7 +31,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% for p in patients %}
+                      {% for p in patient %}
                       
                       <tr>
                       
@@ -52,16 +52,18 @@
                             type="button"
                             class="btn btn-danger btn-sm px-3"
                           >
-                          <a class ="nav-link" href="#" ><i class="fas fa-times">suprimer</i></a>
+                          <a class ="nav-link" href="{% url 'suprimer_patient' p.id %}" ><i class="fas fa-times">suprimer</i></a>
                           </button>
                           <button
                             type="button"
                             class="btn btn-primary btn-sm px-3"
                           >
-                          <a class ="nav-link" href="#" ><i class="fas fa-times">Modifier</i></a>
+                          <a class ="nav-link" href="{% url 'modifier_patient' p.id %}" ><i class="fas fa-times">Modifier</i></a>
                           </button>
                         </td>
+                        
                       </tr>
+                      
                       {% endfor %}
                     </tbody>
                   </table>
@@ -74,4 +76,7 @@
     </div>
   </div>
 </section>
+
 {% endblock %}
+
+
